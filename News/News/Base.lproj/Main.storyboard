@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LN0-Os-nYV">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="lit-Ao-WLu">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="LN0-Os-nYV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kPt-yh-RF5">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="AQb-uv-XaE" kind="relationship" relationship="viewControllers" id="W4j-SW-IOW"/>
+                        <segue destination="Ns3-Pe-TOX" kind="relationship" relationship="viewControllers" id="DHm-k0-xtx"/>
+                        <segue destination="ZRb-7z-P3Z" kind="relationship" relationship="viewControllers" id="RUn-Zv-OSk"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IZX-is-eKl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-264" y="806"/>
+        </scene>
+        <!--Headline-->
+        <scene sceneID="t88-ry-RkE">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AQb-uv-XaE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Headline" image="newspaper" catalog="system" selectedImage="newspaper.fill" id="0pG-Mf-D79"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tub-ge-0fU">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="z4a-WU-5cS" kind="relationship" relationship="rootViewController" id="Wdr-hB-z0V"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DpI-8R-R8H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1031.8840579710145" y="99.776785714285708"/>
+        </scene>
+        <!--HeadlineViewController-->
+        <scene sceneID="HeJ-hc-YHI">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Headline" referencedIdentifier="HeadlineViewController" id="z4a-WU-5cS" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="I3f-03-eEv"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yVD-J7-W1s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1949" y="100"/>
+        </scene>
+        <!--NewsViewController-->
+        <scene sceneID="iqA-Hu-bC0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="News" referencedIdentifier="NewsViewController" id="Bxg-mC-t4A" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="1QQ-uL-rwl"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v5K-x1-W77" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1941" y="806"/>
+        </scene>
+        <!--News-->
+        <scene sceneID="a3B-h0-Qwe">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ns3-Pe-TOX" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="News" image="checkmark.seal" catalog="system" selectedImage="checkmark.seal.fill" id="pwG-E2-FQl"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="INm-ad-Y7S">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Bxg-mC-t4A" kind="relationship" relationship="rootViewController" id="mcj-uh-qL8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NVD-sL-AVp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1032" y="806"/>
+        </scene>
+        <!--ProfileViewController-->
+        <scene sceneID="OF7-YY-yp0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileViewController" id="ObP-vZ-lnB" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="bEj-1z-28q"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mmR-pZ-PXc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1943" y="1525"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="iAW-Kx-KEW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZRb-7z-P3Z" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" selectedImage="person.fill" id="Fkv-JL-DTF"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Ya-hF-E9V">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ObP-vZ-lnB" kind="relationship" relationship="rootViewController" id="xUF-A4-cLH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KTi-D4-qJM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1032" y="1524"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="checkmark.seal" catalog="system" width="128" height="128"/>
+        <image name="checkmark.seal.fill" catalog="system" width="128" height="128"/>
+        <image name="newspaper" catalog="system" width="128" height="108"/>
+        <image name="newspaper.fill" catalog="system" width="128" height="111"/>
+        <image name="person" catalog="system" width="128" height="117"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
+    </resources>
+</document>
