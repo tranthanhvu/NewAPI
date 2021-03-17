@@ -1,23 +1,23 @@
 //
-//  HeadlineViewModel.swift
+//  NewsViewModel.swift
 //  News
 //
-//  Created by Yoyo on 3/17/21.
+//  Created by Yoyo on 3/18/21.
 //
 
 import Foundation
 import RxSwift
 import RxCocoa
 
-class HeadlineViewModel {
-    let navigator: HeadlineNavigateProtocol
+class NewsViewModel {
+    let navigator: NewsNavigateProtocol
     
-    init(navigator: HeadlineNavigateProtocol) {
+    init(navigator: NewsNavigateProtocol) {
         self.navigator = navigator
     }
 }
 
-extension HeadlineViewModel: ViewModelProtocol {
+extension NewsViewModel: ViewModelProtocol {
     struct Input {
         let loadTrigger: Driver<Void>
         let reloadTrigger: Driver<Void>
@@ -32,6 +32,7 @@ extension HeadlineViewModel: ViewModelProtocol {
     }
     
     func transform(_ input: Input) -> Output {
+        
         let items = input.loadTrigger
             .flatMapFirst ({ _ -> Driver<[Article]> in
                 let url = Endpoint.headlines.url!

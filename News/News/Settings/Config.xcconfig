@@ -9,6 +9,6 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 API_KEY = 31ed994852274ba3a9a3a9aeff90771a
-API_HOST = http:/$()/newsapi.org
+API_HOST = https:/$()/newsapi.org
 API_EP_HEADLINE = /v2/top-headlines
-API_EP_SOURCE = /v2/top-headlines
+API_EP_EVERYTHING = /v2/everything

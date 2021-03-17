@@ -12,7 +12,7 @@ enum Environment {
         case host = "API_HOST"
         case key = "API_KEY"
         case headline = "API_EP_HEADLINE"
-        case source = "API_EP_SOURCE"
+        case everything = "API_EP_EVERYTHING"
     }
     
     private static let infoDictionary: [String: Any] = {
@@ -38,8 +38,8 @@ enum Environment {
         value(fromKey: .key)
     }()
     
-    static let endpointSource: String = {
-        value(fromKey: .source)
+    static let endpointEverything: String = {
+        value(fromKey: .everything)
     }()
     
     static let endpointHeadline: String = {

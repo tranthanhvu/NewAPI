@@ -14,4 +14,29 @@ struct Article: Codable, Hashable {
     let urlToImage: String
     let url: String
     let publishedAt: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case author = "author"
+        case title = "title"
+        case description = "description"
+        case urlToImage = "urlToImage"
+        case url = "url"
+        case publishedAt = "publishedAt"
+    }
+  
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        author = (try? container.decode(String.self, forKey: .author)) ?? ""
+        title = (try? container.decode(String.self, forKey: .title)) ?? ""
+        description = (try? container.decode(String.self, forKey: .description)) ?? ""
+        urlToImage = (try? container.decode(String.self, forKey: .urlToImage)) ?? ""
+        url = (try? container.decode(String.self, forKey: .url)) ?? ""
+        
+        let strPublishedAt = (try? container.decode(String.self, forKey: .publishedAt)) ?? ""
+        publishedAt = FormatHelper.dateFormatterOnServer.date(from: strPublishedAt) ?? Date()
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        // DO NOTHING
+    }
 }

@@ -13,66 +13,54 @@ enum Section: CaseIterable {
     case main
 }
 
-class HeadlineViewController: UIViewController {
+class HeadlineViewController: UIViewController, ViewBindableProtocol {
 
     // MARK: - UI
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Data
     let disposeBag = DisposeBag()
-    var viewModel: HeadlineViewModel = HeadlineViewModel()
-    
-    
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Article> = {
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Article> { cell, _, article in
-            var content = cell.defaultContentConfiguration()
-            content.text = article.title
-            
-            cell.contentConfiguration = content
-        }
-        
-        return UICollectionViewDiffableDataSource<Section, Article>(collectionView: collectionView) { (collectionView, indexPath, article) -> UICollectionViewCell? in
-            collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: article)
-        }
-    }()
+    var viewModel: HeadlineViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         setupUI()
-        bindViewModel()
     }
     
     private func setupUI() {
-        let config = UICollectionLayoutListConfiguration(appearance: .plain)
+        let cellName = String(describing: NewsTVC.self)
+        let nib = UINib(nibName: cellName, bundle: Bundle.main)
+        tableView.register(nib, forCellReuseIdentifier: NewsTVC.reuseIdentifier)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         
-        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout.list(using: config)
+        tableView.hideEmptyCells()
     }
     
-    private func bindViewModel() {
-        let loadTrigger = self.rx.viewDidLoad.asDriver().mapToVoid()
+    func bindViewModel() {
+        let loadTrigger = self.rx.viewDidAppear.take(1).asDriverOnErrorJustComplete().mapToVoid()
         let reloadTrigger = Driver<Void>.empty()
         let loadMoreTrigger = Driver<Void>.empty()
+        
         let input = HeadlineViewModel.Input(
             loadTrigger: loadTrigger,
             reloadTrigger: reloadTrigger,
-            loadMoreTrigger: loadMoreTrigger
+            loadMoreTrigger: loadMoreTrigger,
+            selectCell: tableView.rx.itemSelected.asDriver()
         )
         
         let output = viewModel.transform(input)
         
         output.items
-            .drive(onNext: { [weak self] (articles) in
-                self?.applySnapshot(articles: articles, animatingDifferences: true)
+            .drive(self.tableView.rx.items(cellIdentifier: NewsTVC.reuseIdentifier, cellType: NewsTVC.self), curriedArgument: { index, model, cell in
+                cell.bind(article: model)
             })
             .disposed(by: self.disposeBag)
-    }
-    
-    func applySnapshot(articles: [Article], animatingDifferences: Bool = false) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Article>()
-        snapshot.appendSections(Section.allCases)
-        snapshot.appendItems(articles)
-        dataSource.apply(snapshot, animatingDifferences: animatingDifferences, completion: nil)
+        
+        output.openDetail
+            .drive()
+            .disposed(by: self.disposeBag)
     }
 }

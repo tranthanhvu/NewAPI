@@ -12,7 +12,7 @@ import RxCocoa
 extension ObservableType {
     
     public func catchErrorJustComplete() -> Observable<Element> {
-        return catchError { _ in
+        return `catch` { _ in
             return Observable.empty()
         }
     }

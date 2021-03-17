@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IlA-Md-CRn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eek-4q-BTm">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -8,20 +8,57 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--News View Controller-->
+        <!--News-->
         <scene sceneID="Xar-YP-cg1">
             <objects>
-                <viewController storyboardIdentifier="NewsViewController" id="IlA-Md-CRn" customClass="NewsViewController" customModule="News" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewsViewController" title="News" id="IlA-Md-CRn" customClass="NewsViewController" customModule="News" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ogN-pB-NnP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9nZ-0R-rcQ">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="G3M-Uo-Y8W"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="G3M-Uo-Y8W" firstAttribute="trailing" secondItem="9nZ-0R-rcQ" secondAttribute="trailing" id="904-PQ-Uo9"/>
+                            <constraint firstItem="9nZ-0R-rcQ" firstAttribute="leading" secondItem="G3M-Uo-Y8W" secondAttribute="leading" id="KK0-i0-KgM"/>
+                            <constraint firstAttribute="bottom" secondItem="9nZ-0R-rcQ" secondAttribute="bottom" id="SZJ-U8-6gL"/>
+                            <constraint firstItem="9nZ-0R-rcQ" firstAttribute="top" secondItem="G3M-Uo-Y8W" secondAttribute="top" id="bdG-1V-wWL"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="News" id="MAC-4s-4nc">
+                        <barButtonItem key="rightBarButtonItem" title="Category" id="QOE-rj-QZJ"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="categoryButton" destination="QOE-rj-QZJ" id="8Fc-JH-Mbz"/>
+                        <outlet property="tableView" destination="9nZ-0R-rcQ" id="KC1-Wc-L3h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iaR-Um-Tiu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="122" y="100"/>
+            <point key="canvasLocation" x="1031.8840579710145" y="99.776785714285708"/>
+        </scene>
+        <!--NewsNC-->
+        <scene sceneID="eWQ-AA-Tbr">
+            <objects>
+                <navigationController title="NewsNC" automaticallyAdjustsScrollViewInsets="NO" id="eek-4q-BTm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="h8M-kq-Cia">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="IlA-Md-CRn" kind="relationship" relationship="rootViewController" id="gyt-rS-lnN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yqn-Wk-Nym" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="121.73913043478262" y="99.776785714285708"/>
         </scene>
     </scenes>
     <resources>

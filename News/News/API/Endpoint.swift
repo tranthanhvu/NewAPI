@@ -9,19 +9,24 @@ import Foundation
 
 enum Endpoint {
     case headlines
-    case news
+    case news(Category)
     
     var url: URL? {
         switch self {
         case .headlines:
             var urlComponents = URLComponents(string: Environment.host + Environment.endpointHeadline)
-            urlComponents?.queryItems = [URLQueryItem(name: "apiKey", value: Environment.key)]
-            urlComponents?.queryItems = [URLQueryItem(name: "country", value: "us")]
+            urlComponents?.queryItems = [
+                URLQueryItem(name: "apiKey", value: Environment.key),
+                URLQueryItem(name: "country", value: "us")
+            ]
+            
             return urlComponents?.url
-        case .news:
-            var urlComponents = URLComponents(string: Environment.host + Environment.endpointSource)
-            urlComponents?.queryItems = [URLQueryItem(name: "apiKey", value: Environment.key)]
-            urlComponents?.queryItems = [URLQueryItem(name: "country", value: "us")]
+        case .news(let category):
+            var urlComponents = URLComponents(string: Environment.host + Environment.endpointEverything)
+            urlComponents?.queryItems = [
+                URLQueryItem(name: "apiKey", value: Environment.key),
+                URLQueryItem(name: "q", value: category.rawValue)
+            ]
             
             return urlComponents?.url
         }
