@@ -21,9 +21,13 @@ class AppManager {
     let disposeBag = DisposeBag()
     
     let userInfo = BehaviorRelay<User?>(value: AppData.user)
-    var currentCategory: Category = .animal
+    var currentCategory: Category = .bitcoin
     
     func start() {
+        if let user = AppData.user {
+            currentCategory = user.category
+        }
+        
         self.userInfo
             .asObservable()
             .skip(1)

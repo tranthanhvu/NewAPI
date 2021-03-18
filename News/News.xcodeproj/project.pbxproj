@@ -11,6 +11,11 @@
 		2EF236FC260335AB00C3D821 /* ButtonTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EF236FA260335AB00C3D821 /* ButtonTVC.xib */; };
 		2EF23704260344CF00C3D821 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF23703260344CF00C3D821 /* Storage.swift */; };
 		2EF2370926034A8E00C3D821 /* InfoTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF2370826034A8E00C3D821 /* InfoTVC.swift */; };
+		BE249C2A260371D8006A5EC9 /* Paging.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE249C29260371D8006A5EC9 /* Paging.swift */; };
+		BE249C2F26037226006A5EC9 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE249C2E26037226006A5EC9 /* ActivityIndicator.swift */; };
+		BE249C342603724F006A5EC9 /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE249C332603724F006A5EC9 /* ErrorTracker.swift */; };
+		BE249C4A26037ECE006A5EC9 /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE249C4926037ECE006A5EC9 /* UIScrollView+Extension.swift */; };
+		BE249C5026038359006A5EC9 /* PagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE249C4F26038359006A5EC9 /* PagingViewController.swift */; };
 		BEC5BB2226023C0600364D70 /* FormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC5BB2126023C0600364D70 /* FormatHelper.swift */; };
 		BEC5BB2826024CCA00364D70 /* NewsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC5BB2626024CCA00364D70 /* NewsTVC.swift */; };
 		BEC5BB2926024CCA00364D70 /* NewsTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC5BB2726024CCA00364D70 /* NewsTVC.xib */; };
@@ -90,6 +95,11 @@
 		2EF236FA260335AB00C3D821 /* ButtonTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonTVC.xib; sourceTree = "<group>"; };
 		2EF23703260344CF00C3D821 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		2EF2370826034A8E00C3D821 /* InfoTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTVC.swift; sourceTree = "<group>"; };
+		BE249C29260371D8006A5EC9 /* Paging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paging.swift; sourceTree = "<group>"; };
+		BE249C2E26037226006A5EC9 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		BE249C332603724F006A5EC9 /* ErrorTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
+		BE249C4926037ECE006A5EC9 /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
+		BE249C4F26038359006A5EC9 /* PagingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingViewController.swift; sourceTree = "<group>"; };
 		BEC5BB2126023C0600364D70 /* FormatHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatHelper.swift; sourceTree = "<group>"; };
 		BEC5BB2626024CCA00364D70 /* NewsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTVC.swift; sourceTree = "<group>"; };
 		BEC5BB2726024CCA00364D70 /* NewsTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTVC.xib; sourceTree = "<group>"; };
@@ -189,13 +199,24 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		BE249C4E260382EB006A5EC9 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				BE249C4F26038359006A5EC9 /* PagingViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		BEC5BB2026023BF800364D70 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BE249C2E26037226006A5EC9 /* ActivityIndicator.swift */,
+				BE249C332603724F006A5EC9 /* ErrorTracker.swift */,
 				BEC5BB5F26025F9400364D70 /* Storyboard.swift */,
 				BEC5BB2D26024FDC00364D70 /* ReusableView.swift */,
 				BEC5BB2126023C0600364D70 /* FormatHelper.swift */,
 				BED7254F2602DA04009E06CF /* PickerViewController.swift */,
+				BE249C29260371D8006A5EC9 /* Paging.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -274,11 +295,12 @@
 		BECF77C126010EF200AD8447 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				BE249C4E260382EB006A5EC9 /* Base */,
 				BECF77DA2601156000AD8447 /* App */,
 				BEC5BB322602559800364D70 /* Article */,
+				BECF77C226010F1100AD8447 /* Headline */,
 				BECF77C426010F4200AD8447 /* News */,
 				BECF77C326010F3B00AD8447 /* Profile */,
-				BECF77C226010F1100AD8447 /* Headline */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -380,6 +402,7 @@
 		BECF7846260188B900AD8447 /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
+				BE249C4926037ECE006A5EC9 /* UIScrollView+Extension.swift */,
 				BEC5BB8426026A0700364D70 /* UITableView+Extension.swift */,
 				BECF785A26018C1800AD8447 /* Reachability.swift */,
 				BECF785926018C1800AD8447 /* ReachabilityService.swift */,
@@ -541,6 +564,7 @@
 				2EF23704260344CF00C3D821 /* Storage.swift in Sources */,
 				BEC5BB5126025CB400364D70 /* CoordinateProtocol.swift in Sources */,
 				BEC5BB722602648D00364D70 /* AppCoordinator.swift in Sources */,
+				BE249C5026038359006A5EC9 /* PagingViewController.swift in Sources */,
 				BECF78202601342200AD8447 /* User.swift in Sources */,
 				BECF785426018BFA00AD8447 /* Observable+Extension.swift in Sources */,
 				BECF7813260133AD00AD8447 /* Article.swift in Sources */,
@@ -556,8 +580,10 @@
 				BEC5BB492602596300364D70 /* ArticleViewController.swift in Sources */,
 				BECF778C26010E9A00AD8447 /* AppDelegate.swift in Sources */,
 				BEC5BB772602655500364D70 /* MainViewController.swift in Sources */,
+				BE249C342603724F006A5EC9 /* ErrorTracker.swift in Sources */,
 				2EF236FB260335AB00C3D821 /* ButtonTVC.swift in Sources */,
 				2EF2370926034A8E00C3D821 /* InfoTVC.swift in Sources */,
+				BE249C2F26037226006A5EC9 /* ActivityIndicator.swift in Sources */,
 				BEC5BB8F2602732A00364D70 /* NewsCoordinator.swift in Sources */,
 				BEC5BB6026025F9400364D70 /* Storyboard.swift in Sources */,
 				BEC5BB2826024CCA00364D70 /* NewsTVC.swift in Sources */,
@@ -566,9 +592,11 @@
 				BECF785326018BFA00AD8447 /* Drive+Extension.swift in Sources */,
 				BEC5BB652602624500364D70 /* HeadlineCoordinator.swift in Sources */,
 				BECF78352601828300AD8447 /* HeadlineViewModel.swift in Sources */,
+				BE249C2A260371D8006A5EC9 /* Paging.swift in Sources */,
 				BECF77DC2601156900AD8447 /* AppManager.swift in Sources */,
 				BECF77E42601182F00AD8447 /* ProfileViewController.swift in Sources */,
 				BECF785D26018C1800AD8447 /* Reachability.swift in Sources */,
+				BE249C4A26037ECE006A5EC9 /* UIScrollView+Extension.swift in Sources */,
 				BECF77D62601154700AD8447 /* NewsViewController.swift in Sources */,
 				BECF77EF260118B800AD8447 /* API.swift in Sources */,
 				BEC5BB5B26025E8D00364D70 /* ArticleCoordinator.swift in Sources */,

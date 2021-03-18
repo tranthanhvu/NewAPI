@@ -9,42 +9,36 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class NewsViewController: UIViewController, ViewBindableProtocol {
+class NewsViewController: PagingViewController, ViewBindableProtocol {
 
     // MARK: - UI
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var categoryButton: UIBarButtonItem!
     
     // MARK: - Rx & Data
-    let disposeBag = DisposeBag()
     var viewModel: NewsViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        setupUI()
-        bindUI()
     }
     
-    private func setupUI() {
+    override func setupUI() {
+        super.setupUI()
+        
         let cellName = String(describing: NewsTVC.self)
         let nib = UINib(nibName: cellName, bundle: Bundle.main)
         tableView.register(nib, forCellReuseIdentifier: NewsTVC.reuseIdentifier)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = UITableView.automaticDimension
-        
-        tableView.hideEmptyCells()
-    }
-    
-    private func bindUI() {
 
+        tableView.hideEmptyCells()
     }
     
     func bindViewModel() {
         let loadTrigger = self.rx.viewDidAppear.take(1).asDriverOnErrorJustComplete().mapToVoid()
-        let reloadTrigger = Driver<Void>.empty()
-        let loadMoreTrigger = Driver<Void>.empty()
+        let reloadTrigger = self.refreshControl.rx.controlEvent(.valueChanged).asDriverOnErrorJustComplete()
+        let loadMoreTrigger = self.tableView.getLoadMoreTrigger()
         let changeCategory = PublishSubject<Category>()
             
         let input = NewsViewModel.Input(
@@ -87,5 +81,9 @@ class NewsViewController: UIViewController, ViewBindableProtocol {
                 changeCategory.onNext(category)
             })
             .disposed(by: self.disposeBag)
+        
+        bindReloading(output.isReloading)
+        
+        bindLoadMore(output.isLoadingMore)
     }
 }

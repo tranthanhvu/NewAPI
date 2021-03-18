@@ -17,7 +17,7 @@ class NewsViewModel {
     }
 }
 
-extension NewsViewModel: ViewModelProtocol {
+extension NewsViewModel: ViewModelProtocol, PagingFeature {
     struct Input {
         let loadTrigger: Driver<Void>
         let reloadTrigger: Driver<Void>
@@ -28,6 +28,10 @@ extension NewsViewModel: ViewModelProtocol {
     }
     
     struct Output {
+        let error: Driver<Error>
+        let isLoading: Driver<Bool>
+        let isReloading: Driver<Bool>
+        let isLoadingMore: Driver<Bool>
         let items: Driver<[Article]>
         let category: Driver<Category>
         let actions: Driver<Void>
@@ -35,35 +39,45 @@ extension NewsViewModel: ViewModelProtocol {
     
     func transform(_ input: Input) -> Output {
         
-        let category = Driver
-            .merge(
-                input.loadTrigger,
-                AppManager.shared.userInfo.asDriver().mapToVoid())
-            .withLatestFrom(AppManager.shared.userInfo.asDriver())
-            .map({ $0 == nil ? AppManager.shared.currentCategory : $0!.category })
-            
         let updatedCategory = input.changeCategory
             .do(onNext: {
                 AppManager.shared.changeCategory($0)
             })
             .mapToVoid()
         
-        let items = Driver
+        let category = Driver
+            .merge(
+                input.loadTrigger,
+                AppManager.shared.userInfo.asDriver().mapToVoid(),
+                updatedCategory)
+            .withLatestFrom(AppManager.shared.userInfo.asDriver())
+            .map({ $0 == nil ? AppManager.shared.currentCategory : $0!.category })
+            .distinctUntilChanged()
+        
+        let loadTrigger = Driver
             .merge(
                 input.loadTrigger,
                 category.mapToVoid())
             .withLatestFrom(category)
             .distinctUntilChanged()
-            .flatMapFirst ({ category -> Driver<[Article]> in
-                let url = Endpoint.news(category).url!
-                
-                return API.request(url: url)
-                    .asDriver(onErrorJustReturn: Response())
-                    .map { (response) -> [Article] in
-                        return response.articles ?? []
-                    }
-            })
-            .startWith([])
+            .mapToVoid()
+        
+        let getPageResult = getPage(loadTrigger: loadTrigger,
+                                    reloadTrigger: input.reloadTrigger,
+                                    loadMoreTrigger: input.loadMoreTrigger,
+                                    getItems: { (offset) -> Observable<PagingInfo<Article>> in
+                                        return Observable.just(())
+                                            .withLatestFrom(category)
+                                            .flatMapFirst({ [weak self] category -> Observable<PagingInfo<Article>> in
+                                                guard let self = self else {
+                                                    return Observable.empty()
+                                                }
+                                                
+                                                return self.fetchData(category: category, offset: offset)
+                                            })
+                                    })
+        
+        let items = getPageResult.page.map({ $0.items })
 
         let openDetail = input.selectCell
             .withLatestFrom(items) { (indexPath, list) -> Article? in
@@ -82,9 +96,31 @@ extension NewsViewModel: ViewModelProtocol {
         let actions = Driver.merge(openDetail, updatedCategory)
         
         return Output(
+            error: getPageResult.error,
+            isLoading: getPageResult.isLoading,
+            isReloading: getPageResult.isReloading,
+            isLoadingMore: getPageResult.isLoadingMore,
             items: items,
             category: category,
             actions: actions
         )
+    }
+    
+    func fetchData(category: Category, offset: Int) -> Observable<PagingInfo<Article>> {
+        guard let page = Endpoint.getNextPage(offset: offset),
+              let url = Endpoint.news(category).getUrl(page: page) else {
+            return Observable.empty()
+        }
+        
+        return API.request(url: url)
+            .map({ response -> PagingInfo<Article> in
+                let items = response.articles ?? []
+                let total = response.totalResults ?? 0
+                return PagingInfo(offset: offset,
+                                  limit: Endpoint.pageSize,
+                                  totalItems: response.totalResults ?? 0,
+                                  hasMorePages: offset + items.count < total,
+                                  items: items)
+            })
     }
 }

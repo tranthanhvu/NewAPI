@@ -13,23 +13,15 @@ enum Section: CaseIterable {
     case main
 }
 
-class HeadlineViewController: UIViewController, ViewBindableProtocol {
-
-    // MARK: - UI
-    @IBOutlet weak var tableView: UITableView!
+class HeadlineViewController: PagingViewController, ViewBindableProtocol {
     
     // MARK: - Data
-    let disposeBag = DisposeBag()
     var viewModel: HeadlineViewModel!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        setupUI()
-    }
-    
-    private func setupUI() {
+    // MARK: - Func
+    override func setupUI() {
+        super.setupUI()
+        
         let cellName = String(describing: NewsTVC.self)
         let nib = UINib(nibName: cellName, bundle: Bundle.main)
         tableView.register(nib, forCellReuseIdentifier: NewsTVC.reuseIdentifier)
@@ -41,8 +33,8 @@ class HeadlineViewController: UIViewController, ViewBindableProtocol {
     
     func bindViewModel() {
         let loadTrigger = self.rx.viewDidAppear.take(1).asDriverOnErrorJustComplete().mapToVoid()
-        let reloadTrigger = Driver<Void>.empty()
-        let loadMoreTrigger = Driver<Void>.empty()
+        let reloadTrigger = self.refreshControl.rx.controlEvent(.valueChanged).asDriverOnErrorJustComplete()
+        let loadMoreTrigger = self.tableView.getLoadMoreTrigger()
         
         let input = HeadlineViewModel.Input(
             loadTrigger: loadTrigger,
@@ -62,5 +54,9 @@ class HeadlineViewController: UIViewController, ViewBindableProtocol {
         output.openDetail
             .drive()
             .disposed(by: self.disposeBag)
+        
+        bindReloading(output.isReloading)
+        
+        bindLoadMore(output.isLoadingMore)
     }
 }

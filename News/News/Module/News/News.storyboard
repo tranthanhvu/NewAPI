@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9nZ-0R-rcQ">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -27,7 +27,7 @@
                             <constraint firstItem="G3M-Uo-Y8W" firstAttribute="trailing" secondItem="9nZ-0R-rcQ" secondAttribute="trailing" id="904-PQ-Uo9"/>
                             <constraint firstItem="9nZ-0R-rcQ" firstAttribute="leading" secondItem="G3M-Uo-Y8W" secondAttribute="leading" id="KK0-i0-KgM"/>
                             <constraint firstAttribute="bottom" secondItem="9nZ-0R-rcQ" secondAttribute="bottom" id="SZJ-U8-6gL"/>
-                            <constraint firstItem="9nZ-0R-rcQ" firstAttribute="top" secondItem="G3M-Uo-Y8W" secondAttribute="top" id="bdG-1V-wWL"/>
+                            <constraint firstItem="9nZ-0R-rcQ" firstAttribute="top" secondItem="ogN-pB-NnP" secondAttribute="top" id="bdG-1V-wWL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="News" id="MAC-4s-4nc">

@@ -7,9 +7,22 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 extension UITableView {
     func hideEmptyCells() {
         self.tableFooterView = UIView(frame: .zero)
+    }
+    
+    func getLoadMoreTrigger() -> Driver<Void> {
+        self.rx.didScroll
+            .map({ [unowned self] _ in
+                return self.isNearBottomEdge()
+            })
+            .distinctUntilChanged()
+            .filter({ $0 })
+            .mapToVoid()
+            .asDriverOnErrorJustComplete()
     }
 }
