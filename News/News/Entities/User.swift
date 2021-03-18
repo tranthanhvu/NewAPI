@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User: Codable {
+public struct User: Codable, Equatable {
     let name: String
     var category: Category = .bitcoin
 }

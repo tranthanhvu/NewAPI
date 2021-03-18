@@ -33,7 +33,7 @@ class HeadlineCoordinator: CoordinateProtocol {
             return self
         }
         
-        let viewModel = HeadlineViewModel(navigator: self)
+        let viewModel = HeadlineViewModel(navigator: self, newsAPI: NewsAPI())
         vc.bindViewModel(viewModel)
         
         return self

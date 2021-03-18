@@ -58,6 +58,7 @@ class ProfileViewController: UIViewController, ViewBindableProtocol {
         let signOut = PublishSubject<Void>()
         
         let input = ProfileViewModel.Input(
+            userInfo: AppManager.shared.userInfo.asDriver(),
             registerWithName: registerWithName.asDriverOnErrorJustComplete(),
             changeCategory: changeCategory.asDriverOnErrorJustComplete(),
             signOut: signOut.asDriverOnErrorJustComplete()

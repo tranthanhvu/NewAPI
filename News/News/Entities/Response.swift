@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Response: Codable {
+public struct Response: Codable {
     var status: String = ""
     var code: String? = nil
     var message: String? = nil
@@ -25,7 +25,7 @@ struct Response: Codable {
     init() {
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         status = try container.decode(String.self, forKey: .status)
         code = (try? container.decode(String.self, forKey: .code)) ?? nil
@@ -34,7 +34,7 @@ struct Response: Codable {
         articles = (try? container.decode([Article].self, forKey: .articles)) ?? [Article]()
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         // DO NOTHING
     }
 }

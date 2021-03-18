@@ -11,13 +11,13 @@ import RxSwift
 import RxCocoa
 
 public struct PagingInfo<T> {
-    var offset: Int
-    var limit: Int
-    var totalItems: Int
-    var items: [T]
-    var hasMorePages: Bool
+    public var offset: Int
+    public var limit: Int
+    public var totalItems: Int
+    public var items: [T]
+    public var hasMorePages: Bool
     
-    init(offset: Int = 0, limit: Int = 0, totalItems: Int = 0, hasMorePages: Bool = false, items: [T] = []) {
+    public init(offset: Int = 0, limit: Int = 0, totalItems: Int = 0, hasMorePages: Bool = false, items: [T] = []) {
         self.offset = offset
         self.limit = limit
         self.totalItems = totalItems
@@ -26,18 +26,18 @@ public struct PagingInfo<T> {
     }
 }
 
-enum ScreenLoadingType {
+public enum ScreenLoadingType {
     case loading
     case reloading
     case loadMore
 }
 
-struct GetPageResult<T> {
-    var page: Driver<PagingInfo<T>>
-    var error: Driver<Error>
-    var isLoading: Driver<Bool>
-    var isReloading: Driver<Bool>
-    var isLoadingMore: Driver<Bool>
+public struct GetPageResult<T> {
+    public var page: Driver<PagingInfo<T>>
+    public var error: Driver<Error>
+    public var isLoading: Driver<Bool>
+    public var isReloading: Driver<Bool>
+    public var isLoadingMore: Driver<Bool>
     
     public var destructured: (Driver<PagingInfo<T>>, Driver<Error>, Driver<Bool>, Driver<Bool>, Driver<Bool>) {
         return (page, error, isLoading, isReloading, isLoadingMore)
@@ -56,7 +56,7 @@ struct GetPageResult<T> {
     }
 }
 
-protocol PagingFeature {
+public protocol PagingFeature {
 }
 
 extension PagingFeature {

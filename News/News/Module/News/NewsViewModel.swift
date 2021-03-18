@@ -11,9 +11,11 @@ import RxCocoa
 
 class NewsViewModel {
     let navigator: NewsNavigateProtocol
+    let newsAPI: NewsAPIProtocol
     
-    init(navigator: NewsNavigateProtocol) {
+    init(navigator: NewsNavigateProtocol, newsAPI: NewsAPIProtocol) {
         self.navigator = navigator
+        self.newsAPI = newsAPI
     }
 }
 
@@ -73,7 +75,7 @@ extension NewsViewModel: ViewModelProtocol, PagingFeature {
                                                     return Observable.empty()
                                                 }
                                                 
-                                                return self.fetchData(category: category, offset: offset)
+                                                return self.newsAPI.fetchNews(category: category, offset: offset)
                                             })
                                     })
         
@@ -104,23 +106,5 @@ extension NewsViewModel: ViewModelProtocol, PagingFeature {
             category: category,
             actions: actions
         )
-    }
-    
-    func fetchData(category: Category, offset: Int) -> Observable<PagingInfo<Article>> {
-        guard let page = Endpoint.getNextPage(offset: offset),
-              let url = Endpoint.news(category).getUrl(page: page) else {
-            return Observable.empty()
-        }
-        
-        return API.request(url: url)
-            .map({ response -> PagingInfo<Article> in
-                let items = response.articles ?? []
-                let total = response.totalResults ?? 0
-                return PagingInfo(offset: offset,
-                                  limit: Endpoint.pageSize,
-                                  totalItems: response.totalResults ?? 0,
-                                  hasMorePages: offset + items.count < total,
-                                  items: items)
-            })
     }
 }

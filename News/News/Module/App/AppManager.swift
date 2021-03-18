@@ -9,21 +9,21 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class AppData {
+public class AppData {
     @Storage(key: "user", defaultValue: nil)
     static var user: User?
 }
 
 
-class AppManager {
-    static let shared = AppManager()
+public class AppManager {
+    public static let shared = AppManager()
     
     let disposeBag = DisposeBag()
     
-    let userInfo = BehaviorRelay<User?>(value: AppData.user)
-    var currentCategory: Category = .bitcoin
+    public let userInfo = BehaviorRelay<User?>(value: AppData.user)
+    public var currentCategory: Category = .bitcoin
     
-    func start() {
+    public func start() {
         if let user = AppData.user {
             currentCategory = user.category
         }
@@ -37,7 +37,7 @@ class AppManager {
             .disposed(by: self.disposeBag)
     }
     
-    func changeCategory(_ category: Category) {
+    public func changeCategory(_ category: Category) {
         if var info = userInfo.value, info.category != category {
             info.category = category
             userInfo.accept(info)
@@ -46,12 +46,12 @@ class AppManager {
         AppManager.shared.currentCategory = category
     }
     
-    func registerUser(name: String) {
+    public func registerUser(name: String) {
         let newUser = User(name: name, category: currentCategory)
         userInfo.accept(newUser)
     }
     
-    func signOut() {
+    public func signOut() {
         userInfo.accept(nil)
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Article: Codable, Hashable {
+public struct Article: Codable, Hashable {
     let author: String
     let title: String
     let description: String
@@ -25,8 +25,18 @@ struct Article: Codable, Hashable {
         case url = "url"
         case publishedAt = "publishedAt"
     }
+    
+    public init(author: String, title: String, description: String, content: String, urlToImage: String, url: String, publishedAt: Date) {
+        self.author = author
+        self.title = title
+        self.description = description
+        self.content = content
+        self.urlToImage = urlToImage
+        self.url = url
+        self.publishedAt = publishedAt
+    }
   
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         author = (try? container.decode(String.self, forKey: .author)) ?? ""
         title = (try? container.decode(String.self, forKey: .title)) ?? ""
@@ -39,7 +49,7 @@ struct Article: Codable, Hashable {
         publishedAt = FormatHelper.dateFormatterOnServer.date(from: strPublishedAt) ?? Date()
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         // DO NOTHING
     }
 }

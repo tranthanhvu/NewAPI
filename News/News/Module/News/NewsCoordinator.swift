@@ -33,7 +33,7 @@ class NewsCoordinator: CoordinateProtocol {
             return self
         }
         
-        let viewModel = NewsViewModel(navigator: self)
+        let viewModel = NewsViewModel(navigator: self, newsAPI: NewsAPI())
         vc.bindViewModel(viewModel)
         
         return self

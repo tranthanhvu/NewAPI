@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum Endpoint {
+public enum Endpoint {
     case headlines
     case news(Category)
     
-    static let pageSize = 20
+    public static let pageSize = 20
     
-    static func getNextPage(offset: Int) -> Int? {
+    public static func getNextPage(offset: Int) -> Int? {
         if offset % Endpoint.pageSize == 0 {
             return (offset / Endpoint.pageSize) + 1
         }
@@ -21,7 +21,7 @@ enum Endpoint {
         return nil
     }
     
-    func getUrl(page: Int) -> URL? {
+    public func getUrl(page: Int) -> URL? {
         switch self {
         case .headlines:
             var urlComponents = URLComponents(string: Environment.host + Environment.endpointHeadline)
