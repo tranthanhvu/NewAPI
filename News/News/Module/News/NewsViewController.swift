@@ -45,27 +45,14 @@ class NewsViewController: UIViewController, ViewBindableProtocol {
         let loadTrigger = self.rx.viewDidAppear.take(1).asDriverOnErrorJustComplete().mapToVoid()
         let reloadTrigger = Driver<Void>.empty()
         let loadMoreTrigger = Driver<Void>.empty()
-        
-        let changeCategory = categoryButton.rx.tap
-            .asObservable()
-            .flatMapFirst({ (_) -> Observable<Category> in
-                let values = Category.allCases.map({ $0.rawValue })
-                let selectedIndex = 0
-                return UIAlertController.present(in: self, title: "Category", values: values, selectedIndex: selectedIndex)
-                    .map({ Category.allCases[$0] })
-            })
-            .startWith(.bitcoin)
-            .asDriverOnErrorJustComplete()
-            .do(onNext: { [categoryButton] category in
-                categoryButton?.title = category.rawValue
-            })
+        let changeCategory = PublishSubject<Category>()
             
         let input = NewsViewModel.Input(
             loadTrigger: loadTrigger,
             reloadTrigger: reloadTrigger,
             loadMoreTrigger: loadMoreTrigger,
             selectCell: tableView.rx.itemSelected.asDriver(),
-            changeCategory: changeCategory
+            changeCategory: changeCategory.asDriverOnErrorJustComplete()
         )
         
         let output = viewModel.transform(input)
@@ -76,8 +63,29 @@ class NewsViewController: UIViewController, ViewBindableProtocol {
             })
             .disposed(by: self.disposeBag)
         
-        output.openDetail
+        output.actions
             .drive()
+            .disposed(by: self.disposeBag)
+        
+        output.category
+            .drive(onNext: { [weak self] category in
+                self?.categoryButton.title = category.rawValue
+            })
+            .disposed(by: self.disposeBag)
+        
+        categoryButton.rx.tap
+            .asObservable()
+            .withLatestFrom(output.category.asObservable())
+            .flatMapFirst({ (category) -> Observable<Category> in
+                let values = Category.allCases.map({ $0.rawValue })
+                let selectedIndex = values.firstIndex(of: category.rawValue) ?? 0
+                
+                return UIAlertController.present(in: self, title: "Category", values: values, selectedIndex: selectedIndex)
+                    .map({ Category.allCases[$0] })
+            })
+            .subscribe(onNext: { category in
+                changeCategory.onNext(category)
+            })
             .disposed(by: self.disposeBag)
     }
 }
