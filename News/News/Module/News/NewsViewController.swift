@@ -60,7 +60,6 @@ class NewsViewController: UIViewController, ViewBindableProtocol {
                 categoryButton?.title = category.rawValue
             })
             
-        
         let input = NewsViewModel.Input(
             loadTrigger: loadTrigger,
             reloadTrigger: reloadTrigger,

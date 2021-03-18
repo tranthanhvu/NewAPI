@@ -84,7 +84,9 @@ extension UIAlertController {
             
             alertController.setValue(controller, forKey: "contentViewController")
 
-            alertController.addAction(UIAlertAction(title: "Done", style: .cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Done", style: .cancel, handler: { _ in
+                observer.onCompleted()
+            }))
             
             viewController.present(alertController, animated: true, completion: nil)
             return Disposables.create { alertController.dismiss(animated: true, completion: nil) }

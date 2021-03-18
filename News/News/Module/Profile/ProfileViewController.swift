@@ -27,6 +27,7 @@ class ProfileViewController: UIViewController, ViewBindableProtocol {
 
         // Do any additional setup after loading the view.
         setupUI()
+        bindUI()
     }
     
     private func setupUI() {
@@ -43,7 +44,12 @@ class ProfileViewController: UIViewController, ViewBindableProtocol {
     }
     
     func bindUI() {
-        
+        tableView.rx
+            .itemSelected
+            .subscribe(onNext: { indexPath in
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     func bindViewModel() {
@@ -80,6 +86,7 @@ class ProfileViewController: UIViewController, ViewBindableProtocol {
                     cell.textLabel?.text = "User name"
                     cell.detailTextLabel?.text = name
                     cell.accessoryType = .none
+                    cell.selectionStyle = .none
                     
                     return cell
                     
@@ -89,6 +96,7 @@ class ProfileViewController: UIViewController, ViewBindableProtocol {
                     cell.textLabel?.text = "Category"
                     cell.detailTextLabel?.text = name
                     cell.accessoryType = .disclosureIndicator
+                    cell.selectionStyle = .default
                     
                     return cell
                 }
