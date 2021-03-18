@@ -43,6 +43,30 @@ extension UIAlertController {
         .subscribe(on: MainScheduler.instance)
     }
     
+    static func present(in viewController: UIViewController, title: String?, message: String?, style: UIAlertController.Style, actions: [AlertAction], setupTextFields: @escaping ((inout UIAlertController) -> Void), cosmeticBlock: ((UIAlertAction) -> Void)? = nil) -> Observable<(Int,[String])> {
+        return Observable.create { observer in
+            var alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+
+            setupTextFields(&alertController)
+            
+            actions.enumerated().forEach { index, action in
+                let uiAction = UIAlertAction(title: action.title, style: action.style) { _ in
+                    let list = alertController.textFields?.map({ $0.text ?? "" }) ?? []
+                    observer.onNext((index, list))
+                    observer.onCompleted()
+                }
+                
+                cosmeticBlock?(uiAction)
+                
+                alertController.addAction(uiAction)
+            }
+
+            viewController.present(alertController, animated: true, completion: nil)
+            return Disposables.create { alertController.dismiss(animated: true, completion: nil) }
+        }
+        .subscribe(on: MainScheduler.instance)
+    }
+    
     static func present(in viewController: UIViewController, title: String?, values: [String], selectedIndex: Int) -> Observable<Int> {
         return Observable.create { observer in
             let alertController = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
@@ -51,7 +75,7 @@ extension UIAlertController {
             controller.preferredContentSize.height = 216
             alertController.preferredContentSize.height = 216
             
-            controller.bind(values: values)
+            controller.bind(values: values, selectedIndex: selectedIndex)
             
             controller.action = { index in
                 observer.onNext(index)

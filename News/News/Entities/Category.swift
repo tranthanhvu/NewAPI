@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum Category: String, CaseIterable {
-    case bitcoin = "bitcoin"
-    case apple = "apple"
-    case earthquake = "earthquake"
-    case animal = "animal"
+enum Category: String, CaseIterable, Codable {
+    case bitcoin = "Bitcoin"
+    case apple = "Apple"
+    case earthquake = "Earthquake"
+    case animal = "Animal"
 }

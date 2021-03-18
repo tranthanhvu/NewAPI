@@ -31,12 +31,16 @@ class PickerViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    func bind(values: [String]) {
+    func bind(values: [String], selectedIndex: Int = 0) {
+        
+        
         Observable.just(values)
             .bind(to: picker.rx.itemTitles) { (row, element) in
                 return element
             }
             .disposed(by: self.disposeBag)
+        
+        picker.selectRow(selectedIndex, inComponent: 0, animated: true)
         
         picker.rx.itemSelected
             .subscribe(onNext: { [weak self] index, _ in

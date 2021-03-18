@@ -29,13 +29,20 @@ extension NewsViewModel: ViewModelProtocol {
     
     struct Output {
         let items: Driver<[Article]>
+        let category: Driver<Category>
         let openDetail: Driver<Void>
     }
     
     func transform(_ input: Input) -> Output {
         
-        let items = input.changeCategory// input.loadTrigger
-            //.withLatestFrom(input.changeCategory)
+        let defaultCategory = Driver.just(Category.bitcoin)
+        
+        let category = Driver.just(Category.bitcoin)
+            
+        let items = input.changeCategory
+            .do(onNext: {
+                AppManager.shared.changeCategory($0)
+            })
             .flatMapFirst ({ category -> Driver<[Article]> in
                 let url = Endpoint.news(category).url!
                 
@@ -46,7 +53,6 @@ extension NewsViewModel: ViewModelProtocol {
                     }
             })
             .startWith([])
-            .debug("aaa")
 
         let openDetail = input.selectCell
             .withLatestFrom(items) { (indexPath, list) -> Article? in
@@ -64,6 +70,7 @@ extension NewsViewModel: ViewModelProtocol {
         
         return Output(
             items: items,
+            category: category,
             openDetail: openDetail
         )
     }

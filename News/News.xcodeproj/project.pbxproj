@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2EF236FB260335AB00C3D821 /* ButtonTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF236F9260335AB00C3D821 /* ButtonTVC.swift */; };
+		2EF236FC260335AB00C3D821 /* ButtonTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EF236FA260335AB00C3D821 /* ButtonTVC.xib */; };
+		2EF23704260344CF00C3D821 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF23703260344CF00C3D821 /* Storage.swift */; };
+		2EF2370926034A8E00C3D821 /* InfoTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF2370826034A8E00C3D821 /* InfoTVC.swift */; };
 		BEC5BB2226023C0600364D70 /* FormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC5BB2126023C0600364D70 /* FormatHelper.swift */; };
 		BEC5BB2826024CCA00364D70 /* NewsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC5BB2626024CCA00364D70 /* NewsTVC.swift */; };
 		BEC5BB2926024CCA00364D70 /* NewsTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC5BB2726024CCA00364D70 /* NewsTVC.xib */; };
@@ -82,6 +86,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2EF236F9260335AB00C3D821 /* ButtonTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTVC.swift; sourceTree = "<group>"; };
+		2EF236FA260335AB00C3D821 /* ButtonTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonTVC.xib; sourceTree = "<group>"; };
+		2EF23703260344CF00C3D821 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		2EF2370826034A8E00C3D821 /* InfoTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTVC.swift; sourceTree = "<group>"; };
 		BEC5BB2126023C0600364D70 /* FormatHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatHelper.swift; sourceTree = "<group>"; };
 		BEC5BB2626024CCA00364D70 /* NewsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTVC.swift; sourceTree = "<group>"; };
 		BEC5BB2726024CCA00364D70 /* NewsTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTVC.xib; sourceTree = "<group>"; };
@@ -171,12 +179,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2EF236F82603358200C3D821 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2EF236F9260335AB00C3D821 /* ButtonTVC.swift */,
+				2EF236FA260335AB00C3D821 /* ButtonTVC.xib */,
+				2EF2370826034A8E00C3D821 /* InfoTVC.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		BEC5BB2026023BF800364D70 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				BEC5BB5F26025F9400364D70 /* Storyboard.swift */,
 				BEC5BB2D26024FDC00364D70 /* ReusableView.swift */,
 				BEC5BB2126023C0600364D70 /* FormatHelper.swift */,
+				BED7254F2602DA04009E06CF /* PickerViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -279,10 +298,11 @@
 		BECF77C326010F3B00AD8447 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				2EF236F82603358200C3D821 /* Cell */,
 				BECF78072601314D00AD8447 /* Profile.storyboard */,
 				BECF77E32601182F00AD8447 /* ProfileViewController.swift */,
-				BED725412602D641009E06CF /* ProfileCoordinator.swift */,
 				BED725462602D64B009E06CF /* ProfileViewModel.swift */,
+				BED725412602D641009E06CF /* ProfileCoordinator.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -294,7 +314,6 @@
 				BECF77D52601154700AD8447 /* NewsViewController.swift */,
 				BEC5BB89260272D900364D70 /* NewsViewModel.swift */,
 				BEC5BB8E2602732A00364D70 /* NewsCoordinator.swift */,
-				BED7254F2602DA04009E06CF /* PickerViewController.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -302,6 +321,7 @@
 		BECF77DA2601156000AD8447 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				2EF23703260344CF00C3D821 /* Storage.swift */,
 				BECF77DB2601156900AD8447 /* AppManager.swift */,
 				BEC5BB712602648D00364D70 /* AppCoordinator.swift */,
 				BEC5BB762602655500364D70 /* MainViewController.swift */,
@@ -487,6 +507,7 @@
 				BECF7800260130AC00AD8447 /* Headline.storyboard in Resources */,
 				BECF780D2601316C00AD8447 /* News.storyboard in Resources */,
 				BECF779B26010E9C00AD8447 /* LaunchScreen.storyboard in Resources */,
+				2EF236FC260335AB00C3D821 /* ButtonTVC.xib in Resources */,
 				BEC5BB3C260255C500364D70 /* Article.storyboard in Resources */,
 				BECF78082601314D00AD8447 /* Profile.storyboard in Resources */,
 				BEC5BB2926024CCA00364D70 /* NewsTVC.xib in Resources */,
@@ -517,6 +538,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BECF782526013AB400AD8447 /* Endpoint.swift in Sources */,
+				2EF23704260344CF00C3D821 /* Storage.swift in Sources */,
 				BEC5BB5126025CB400364D70 /* CoordinateProtocol.swift in Sources */,
 				BEC5BB722602648D00364D70 /* AppCoordinator.swift in Sources */,
 				BECF78202601342200AD8447 /* User.swift in Sources */,
@@ -534,6 +556,8 @@
 				BEC5BB492602596300364D70 /* ArticleViewController.swift in Sources */,
 				BECF778C26010E9A00AD8447 /* AppDelegate.swift in Sources */,
 				BEC5BB772602655500364D70 /* MainViewController.swift in Sources */,
+				2EF236FB260335AB00C3D821 /* ButtonTVC.swift in Sources */,
+				2EF2370926034A8E00C3D821 /* InfoTVC.swift in Sources */,
 				BEC5BB8F2602732A00364D70 /* NewsCoordinator.swift in Sources */,
 				BEC5BB6026025F9400364D70 /* Storyboard.swift in Sources */,
 				BEC5BB2826024CCA00364D70 /* NewsTVC.swift in Sources */,
