@@ -58,6 +58,10 @@
 		BECF785426018BFA00AD8447 /* Observable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECF785226018BFA00AD8447 /* Observable+Extension.swift */; };
 		BECF785C26018C1800AD8447 /* ReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECF785926018C1800AD8447 /* ReachabilityService.swift */; };
 		BECF785D26018C1800AD8447 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECF785A26018C1800AD8447 /* Reachability.swift */; };
+		BED725422602D641009E06CF /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED725412602D641009E06CF /* ProfileCoordinator.swift */; };
+		BED725472602D64B009E06CF /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED725462602D64B009E06CF /* ProfileViewModel.swift */; };
+		BED725502602DA04009E06CF /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED7254F2602DA04009E06CF /* PickerViewController.swift */; };
+		BED725552602DC0A009E06CF /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED725542602DC0A009E06CF /* UIAlertController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +137,10 @@
 		BECF785226018BFA00AD8447 /* Observable+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Extension.swift"; sourceTree = "<group>"; };
 		BECF785926018C1800AD8447 /* ReachabilityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityService.swift; sourceTree = "<group>"; };
 		BECF785A26018C1800AD8447 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		BED725412602D641009E06CF /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
+		BED725462602D64B009E06CF /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		BED7254F2602DA04009E06CF /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		BED725542602DC0A009E06CF /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,8 +279,10 @@
 		BECF77C326010F3B00AD8447 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				BECF77E32601182F00AD8447 /* ProfileViewController.swift */,
 				BECF78072601314D00AD8447 /* Profile.storyboard */,
+				BECF77E32601182F00AD8447 /* ProfileViewController.swift */,
+				BED725412602D641009E06CF /* ProfileCoordinator.swift */,
+				BED725462602D64B009E06CF /* ProfileViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -284,6 +294,7 @@
 				BECF77D52601154700AD8447 /* NewsViewController.swift */,
 				BEC5BB89260272D900364D70 /* NewsViewModel.swift */,
 				BEC5BB8E2602732A00364D70 /* NewsCoordinator.swift */,
+				BED7254F2602DA04009E06CF /* PickerViewController.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -356,6 +367,7 @@
 				BECF785226018BFA00AD8447 /* Observable+Extension.swift */,
 				BECF784C26018BCC00AD8447 /* UIViewController+Rx.swift */,
 				BEC5BB6C2602641600364D70 /* UIWindow+Key.swift */,
+				BED725542602DC0A009E06CF /* UIAlertController+Extension.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -518,6 +530,7 @@
 				BEC5BB8A260272D900364D70 /* NewsViewModel.swift in Sources */,
 				BEC5BB8526026A0700364D70 /* UITableView+Extension.swift in Sources */,
 				BECF779026010E9A00AD8447 /* ViewController.swift in Sources */,
+				BED725472602D64B009E06CF /* ProfileViewModel.swift in Sources */,
 				BEC5BB492602596300364D70 /* ArticleViewController.swift in Sources */,
 				BECF778C26010E9A00AD8447 /* AppDelegate.swift in Sources */,
 				BEC5BB772602655500364D70 /* MainViewController.swift in Sources */,
@@ -538,9 +551,12 @@
 				BEC5BB6D2602641600364D70 /* UIWindow+Key.swift in Sources */,
 				BECF778E26010E9A00AD8447 /* SceneDelegate.swift in Sources */,
 				BECF77F62601276A00AD8447 /* Environment.swift in Sources */,
+				BED725422602D641009E06CF /* ProfileCoordinator.swift in Sources */,
+				BED725552602DC0A009E06CF /* UIAlertController+Extension.swift in Sources */,
 				BECF783F2601873D00AD8447 /* ViewModelProtocol.swift in Sources */,
 				BEC5BB412602575400364D70 /* ArticleViewModel.swift in Sources */,
 				BECF785C26018C1800AD8447 /* ReachabilityService.swift in Sources */,
+				BED725502602DA04009E06CF /* PickerViewController.swift in Sources */,
 				BECF781B260133E300AD8447 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

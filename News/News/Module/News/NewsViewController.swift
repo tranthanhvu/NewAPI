@@ -38,11 +38,7 @@ class NewsViewController: UIViewController, ViewBindableProtocol {
     }
     
     private func bindUI() {
-        categoryButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.presentPicker()
-            })
-            .disposed(by: self.disposeBag)
+
     }
     
     func bindViewModel() {
@@ -50,11 +46,27 @@ class NewsViewController: UIViewController, ViewBindableProtocol {
         let reloadTrigger = Driver<Void>.empty()
         let loadMoreTrigger = Driver<Void>.empty()
         
+        let changeCategory = categoryButton.rx.tap
+            .asObservable()
+            .flatMapFirst({ (_) -> Observable<Category> in
+                let values = Category.allCases.map({ $0.rawValue })
+                let selectedIndex = 0
+                return UIAlertController.present(in: self, title: "Category", values: values, selectedIndex: selectedIndex)
+                    .map({ Category.allCases[$0] })
+            })
+            .startWith(.bitcoin)
+            .asDriverOnErrorJustComplete()
+            .do(onNext: { [categoryButton] category in
+                categoryButton?.title = category.rawValue
+            })
+            
+        
         let input = NewsViewModel.Input(
             loadTrigger: loadTrigger,
             reloadTrigger: reloadTrigger,
             loadMoreTrigger: loadMoreTrigger,
-            selectCell: tableView.rx.itemSelected.asDriver()
+            selectCell: tableView.rx.itemSelected.asDriver(),
+            changeCategory: changeCategory
         )
         
         let output = viewModel.transform(input)
@@ -71,30 +83,7 @@ class NewsViewController: UIViewController, ViewBindableProtocol {
     }
 
     func presentPicker() {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let items: Observable<[String]> = Observable.of(Category.allCases.map({ $0.rawValue }))
-        
-        let controller = UIViewController()
-        
-        let picker = UIPickerView(frame: CGRect.zero)
-                
-        alertController.view.addSubview(picker)
-        
-        
-//        let picker = UIPickerView(frame: controller.view.frame)
-        items.bind(to: picker.rx.itemTitles) { (row, element) in
-            return element
-        }
-        .disposed(by: self.disposeBag)
-        
-        controller.view.addSubview(picker)
-        
-        alertController.setValue(controller, forKey: "contentViewController")
-
-        alertController.addAction(UIAlertAction(title: "Done", style: .cancel, handler: nil))
-        
-        self.present(alertController, animated: true, completion: nil)
     }
     /*
     // MARK: - Navigation

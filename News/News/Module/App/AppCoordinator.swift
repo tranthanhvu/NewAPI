@@ -43,16 +43,11 @@ class AppCoordinator: CoordinateProtocol {
                     coord.viewController =  newsVC
                     coord.prepare()
                 }
-//                else if let dictionaryVC = nc.viewControllers.first as? DictionaryViewController {
-//                    let coord = DictionaryCoordinator(parentCoord: self)
-//                    coord.viewController = dictionaryVC
-//                    coord.prepare()
-//                }
-//                else if let menuVC = nc.viewControllers.first as? MenuViewController {
-//                    let coord = MenuCoordinator(parentCoord: self)
-//                    coord.viewController = menuVC
-//                    coord.prepare()
-//                }
+                else if let profileVC = nc.viewControllers.first as? ProfileViewController {
+                    let coord = ProfileCoordinator(parentCoord: self)
+                    coord.viewController = profileVC
+                    coord.prepare()
+                }
             }
         })
         

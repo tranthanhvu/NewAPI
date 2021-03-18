@@ -24,6 +24,7 @@ extension NewsViewModel: ViewModelProtocol {
         let loadMoreTrigger: Driver<Void>
         
         let selectCell: Driver<IndexPath>
+        let changeCategory: Driver<Category>
     }
     
     struct Output {
@@ -33,9 +34,11 @@ extension NewsViewModel: ViewModelProtocol {
     
     func transform(_ input: Input) -> Output {
         
-        let items = input.loadTrigger
-            .flatMapFirst ({ _ -> Driver<[Article]> in
-                let url = Endpoint.headlines.url!
+        let items = input.changeCategory// input.loadTrigger
+            //.withLatestFrom(input.changeCategory)
+            .flatMapFirst ({ category -> Driver<[Article]> in
+                let url = Endpoint.news(category).url!
+                
                 return API.request(url: url)
                     .asDriver(onErrorJustReturn: Response())
                     .map { (response) -> [Article] in
