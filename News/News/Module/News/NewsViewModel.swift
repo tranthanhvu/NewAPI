@@ -46,6 +46,7 @@ extension NewsViewModel: ViewModelProtocol {
                     }
             })
             .startWith([])
+            .debug("aaa")
 
         let openDetail = input.selectCell
             .withLatestFrom(items) { (indexPath, list) -> Article? in

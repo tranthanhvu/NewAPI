@@ -11,6 +11,7 @@ struct Article: Codable, Hashable {
     let author: String
     let title: String
     let description: String
+    let content: String
     let urlToImage: String
     let url: String
     let publishedAt: Date
@@ -19,6 +20,7 @@ struct Article: Codable, Hashable {
         case author = "author"
         case title = "title"
         case description = "description"
+        case content = "content"
         case urlToImage = "urlToImage"
         case url = "url"
         case publishedAt = "publishedAt"
@@ -29,6 +31,7 @@ struct Article: Codable, Hashable {
         author = (try? container.decode(String.self, forKey: .author)) ?? ""
         title = (try? container.decode(String.self, forKey: .title)) ?? ""
         description = (try? container.decode(String.self, forKey: .description)) ?? ""
+        content = (try? container.decode(String.self, forKey: .content)) ?? ""
         urlToImage = (try? container.decode(String.self, forKey: .urlToImage)) ?? ""
         url = (try? container.decode(String.self, forKey: .url)) ?? ""
         
