@@ -40,7 +40,7 @@ extension NewsViewModel: ViewModelProtocol {
                 input.loadTrigger,
                 AppManager.shared.userInfo.asDriver().mapToVoid())
             .withLatestFrom(AppManager.shared.userInfo.asDriver())
-            .map({ $0 == nil ? Category.bitcoin : $0!.category })
+            .map({ $0 == nil ? AppManager.shared.currentCategory : $0!.category })
             
         let updatedCategory = input.changeCategory
             .do(onNext: {
@@ -53,6 +53,7 @@ extension NewsViewModel: ViewModelProtocol {
                 input.loadTrigger,
                 category.mapToVoid())
             .withLatestFrom(category)
+            .distinctUntilChanged()
             .flatMapFirst ({ category -> Driver<[Article]> in
                 let url = Endpoint.news(category).url!
                 
