@@ -51,11 +51,15 @@ class ArticleViewController: UIViewController, ViewBindableProtocol {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        textView.textContainer.exclusionPaths = [imageRectPath]
-        textView.textContainer.layoutManager?.ensureLayout(for: textView.textContainer)
+        if imageView.isHidden == false {
+            textView.textContainer.exclusionPaths = [imageRectPath]
+            textView.textContainer.layoutManager?.ensureLayout(for: textView.textContainer)
+        }
     }
     
     private func setupUI() {
+        self.imageView.isHidden = true
+        
         detailButton.layer.cornerRadius = detailButton.frame.height * 0.5
         
         textView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 70, right: 10)
@@ -98,7 +102,9 @@ class ArticleViewController: UIViewController, ViewBindableProtocol {
         
 //        let longContent = (0...30).map({ _ in article.content }).joined(separator: "\n")
         
-        let desc = NSAttributedString(string: article.content, attributes: [
+        let content = article.content.isEmpty ? article.description : article.content
+        
+        let desc = NSAttributedString(string: content, attributes: [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)
         ])
         
@@ -121,8 +127,12 @@ class ArticleViewController: UIViewController, ViewBindableProtocol {
         self.textView.attributedText = attString
         
         if let imageUrl = URL(string: article.urlToImage) {
+            self.imageView.isHidden = false
             self.imageView.sd_setImage(with: imageUrl, completed: nil)
+        } else {
+            self.imageView.isHidden = true
         }
+        
         
         if let titleRect = textRect(article.title) {
             let newRect = view.convert(titleRect, from: self.textView)
