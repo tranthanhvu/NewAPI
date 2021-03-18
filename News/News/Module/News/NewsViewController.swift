@@ -21,6 +21,7 @@ class NewsViewController: PagingViewController, ViewBindableProtocol {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        bindUI()
     }
     
     override func setupUI() {
@@ -33,6 +34,15 @@ class NewsViewController: PagingViewController, ViewBindableProtocol {
         tableView.estimatedRowHeight = UITableView.automaticDimension
 
         tableView.hideEmptyCells()
+    }
+    
+    func bindUI() {
+        tableView.rx
+            .itemSelected
+            .subscribe(onNext: { indexPath in
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     func bindViewModel() {
