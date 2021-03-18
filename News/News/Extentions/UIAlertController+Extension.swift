@@ -77,14 +77,20 @@ extension UIAlertController {
             
             controller.bind(values: values, selectedIndex: selectedIndex)
             
+            var userSelectedItem = selectedIndex
+            
             controller.action = { index in
-                observer.onNext(index)
-                observer.onCompleted()
+                userSelectedItem = index
             }
             
             alertController.setValue(controller, forKey: "contentViewController")
 
-            alertController.addAction(UIAlertAction(title: "Done", style: .cancel, handler: { _ in
+            alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
+                observer.onNext(userSelectedItem)
+                observer.onCompleted()
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
                 observer.onCompleted()
             }))
             
