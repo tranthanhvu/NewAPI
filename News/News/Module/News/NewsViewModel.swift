@@ -62,6 +62,8 @@ extension NewsViewModel: ViewModelProtocol, PagingFeature {
                 category.mapToVoid())
             .withLatestFrom(input.onScreen)
             .filter({ $0 })
+            .withLatestFrom(category)
+            .distinctUntilChanged()
             .mapToVoid()
         
         let getPageResult = getPage(loadTrigger: loadTrigger,
