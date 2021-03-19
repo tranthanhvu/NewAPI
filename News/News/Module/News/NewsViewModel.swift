@@ -58,11 +58,12 @@ extension NewsViewModel: ViewModelProtocol, PagingFeature {
         
         let loadTrigger = Driver
             .merge(
-                input.loadTrigger.withLatestFrom(category),
-                category)
-            .distinctUntilChanged()
+                input.loadTrigger,
+                category.mapToVoid())
             .withLatestFrom(input.onScreen)
             .filter({ $0 })
+            .withLatestFrom(category)
+            .distinctUntilChanged()
             .mapToVoid()
         
         let getPageResult = getPage(loadTrigger: loadTrigger,
