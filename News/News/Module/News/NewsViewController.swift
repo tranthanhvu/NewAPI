@@ -91,7 +91,11 @@ class NewsViewController: PagingViewController, ViewBindableProtocol {
                 let values = Category.allCases.map({ $0.rawValue })
                 let selectedIndex = values.firstIndex(of: category.rawValue) ?? 0
                 
-                return UIAlertController.present(in: self, title: "Category", values: values, selectedIndex: selectedIndex)
+                return UIAlertController.present(in: self,
+                                                 title: L10n.Profile.SelectCategory.title,
+                                                 message: L10n.Profile.SelectCategory.message,
+                                                 values: values,
+                                                 selectedIndex: selectedIndex)
                     .map({ Category.allCases[$0] })
             })
             .subscribe(onNext: { category in
@@ -106,7 +110,7 @@ class NewsViewController: PagingViewController, ViewBindableProtocol {
                 if let error = error as? APIError {
                     switch error {
                     case let .other(code, message):
-                        self.alert(message: message, title: "CODE: \(code)")
+                        self.alert(message: message, title: L10n.Error.codeTitle(code))
                     }
 
                     return

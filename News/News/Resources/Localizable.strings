@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  News
+
+  Created by Yoyo on 3/19/21.
+  
+*/
+
+"profile.register" = "Register";
+"profile.signOut" = "Sign Out";
+"profile.userName" = "User name";
+"profile.category" = "Category";
+"profile.inputName.title" = "Please input your name!";
+"profile.inputName.message" = "It will be used to register your account.";
+"profile.inputName.ok" = "Register";
+"profile.inputName.cancel" = "Cancel";
+"profile.selectCategory.title" = "Which category would you refer?";
+"profile.selectCategory.message" = "We will use it to filter articles in News.";
+"error.codeTitle" = "Error %d";

@@ -67,9 +67,9 @@ extension UIAlertController {
         .subscribe(on: MainScheduler.instance)
     }
     
-    static func present(in viewController: UIViewController, title: String?, values: [String], selectedIndex: Int) -> Observable<Int> {
+    static func present(in viewController: UIViewController, title: String?, message: String?, values: [String], selectedIndex: Int) -> Observable<Int> {
         return Observable.create { observer in
-            let alertController = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
             
             let controller = PickerViewController()
             controller.preferredContentSize.height = 216

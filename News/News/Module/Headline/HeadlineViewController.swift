@@ -74,7 +74,7 @@ class HeadlineViewController: PagingViewController, ViewBindableProtocol {
                 if let error = error as? APIError {
                     switch error {
                     case let .other(code, message):
-                        self.alert(message: message, title: "CODE: \(code)")
+                        self.alert(message: message, title: L10n.Error.codeTitle(code))
                     }
 
                     return

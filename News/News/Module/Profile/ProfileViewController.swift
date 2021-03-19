@@ -71,20 +71,20 @@ class ProfileViewController: UIViewController, ViewBindableProtocol {
                 switch item {
                 case .register:
                     let cell = tv.dequeueReusableCell(withIdentifier: ButtonTVC.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! ButtonTVC
-                    cell.bind(text: "Register", color: .systemBlue)
+                    cell.bind(text: L10n.Profile.register, color: .systemBlue)
                     
                     return cell
                     
                 case .signOut:
                     let cell = tv.dequeueReusableCell(withIdentifier: ButtonTVC.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! ButtonTVC
-                    cell.bind(text: "Sign Out", color: .systemRed)
+                    cell.bind(text: L10n.Profile.signOut, color: .systemRed)
                     
                     return cell
                     
                 case .userInfo(let name):
                     let cell = tv.dequeueReusableCell(withIdentifier: InfoTVC.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! InfoTVC
                     
-                    cell.textLabel?.text = "User name"
+                    cell.textLabel?.text = L10n.Profile.userName
                     cell.detailTextLabel?.text = name
                     cell.accessoryType = .none
                     cell.selectionStyle = .none
@@ -94,7 +94,7 @@ class ProfileViewController: UIViewController, ViewBindableProtocol {
                 case .categoryInfo(let name):
                     let cell = tv.dequeueReusableCell(withIdentifier: InfoTVC.reuseIdentifier, for: IndexPath(row: row, section: 0)) as! InfoTVC
                     
-                    cell.textLabel?.text = "Category"
+                    cell.textLabel?.text = L10n.Profile.category
                     cell.detailTextLabel?.text = name
                     cell.accessoryType = .disclosureIndicator
                     cell.selectionStyle = .default
@@ -125,14 +125,14 @@ class ProfileViewController: UIViewController, ViewBindableProtocol {
                 guard let self = self else { return Observable.empty() }
                 
                 let actions = [
-                    AlertAction(title: "Cancel", style: .cancel),
-                    AlertAction(title: "Register", style: .default)
+                    AlertAction(title: L10n.Profile.InputName.cancel, style: .cancel),
+                    AlertAction(title: L10n.Profile.InputName.ok, style: .default)
                 ]
 
                 return UIAlertController
                     .present(in: self,
-                             title: "Please input your name!",
-                             message: nil,
+                             title: L10n.Profile.InputName.title,
+                             message: L10n.Profile.InputName.message,
                              style: .alert,
                              actions: actions,
                              setupTextFields: { (alertController) in
@@ -157,7 +157,11 @@ class ProfileViewController: UIViewController, ViewBindableProtocol {
                 let values = Category.allCases.map({ $0.rawValue })
                 let selectedIndex = values.firstIndex(of: categoryName) ?? 0
                 
-                return UIAlertController.present(in: self, title: "Category", values: values, selectedIndex: selectedIndex)
+                return UIAlertController.present(in: self,
+                                                 title: L10n.Profile.SelectCategory.title,
+                                                 message: L10n.Profile.SelectCategory.message,
+                                                 values: values,
+                                                 selectedIndex: selectedIndex)
                     .map({ Category.allCases[$0] })
             })
             .subscribe(onNext: { category in
