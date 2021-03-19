@@ -20,7 +20,7 @@ Please create a new application with following conditions
 
 ------
 # Setup & Run
-## Setup Cocoapods
+### Setup Cocoapods
 This project uses Cocoapods to manage 3rd parties, you have to run some commands to setup it.
 1. Open Terminal App
 2. $ `sudo gem install cocoapods`
@@ -28,8 +28,11 @@ This project uses Cocoapods to manage 3rd parties, you have to run some commands
 
 You can refer to the offical information here [cocoapods.org](https://cocoapods.org)
 
-## install 3rd parties & open App
+### Install 3rd parties & open App
 1. Open Terminal app
 2. $ `cd <the/path/to/project>`
 3. $ `pod install`
 4. $ `open News.xcworkspace`
+
+### Preview
+![Preview](./Images/Preview.gif)
