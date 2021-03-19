@@ -35,4 +35,4 @@ You can refer to the offical information here [cocoapods.org](https://cocoapods.
 4. $ `open News.xcworkspace`
 
 ### Preview
-![Preview](./Images/Preview.gif)
+![Preview](./Images/preview.gif)
