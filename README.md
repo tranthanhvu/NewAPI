@@ -1,10 +1,14 @@
 # News
 
-## Requirements
+### Preview
+![Paging](./Images/paging.gif) ![Register & Change category](./Images/register.gif)
+
+
+### Requirements
 Please create a new application with following conditions
 1. Use https://newsapi.org/ as data source
 2. Application must be written in Kotlin OR Swift
-3.  Application must be written in MVVM and MVP, and write a test case.
+3. Application must be written in MVVM and MVP, and write a test case.
 4. Use any framework and library that you know and understand
 5. Application must have this feature:
     a. News List with image
@@ -18,6 +22,23 @@ Please create a new application with following conditions
 7. Please initialize version control with git for checking git history
 8. Please upload to Github
 
+
+### Achivements
+- [x] using MVVM architecture (MVVM-C)
+- [x] using RxSwift to bind data
+- [x] using 3rd party SDWebImage to load remote images
+- [x] unit test
+- [x] 3 Tabs: Headlines, News, Profile
+- [x] Register with username, saved the username and category on local storage 
+- [x] view detail article, open safari to get more detail
+- [ ] transform the image from list view to detail view with a smooth animation
+- [x] paging (load, pull to refresh, load more)
+- [x] handle some common errors
+- [x] version control with git
+- [ ] cache data for offline
+- [x] dark mode 
+ 
+
 ------
 # Setup & Run
 ### Setup Cocoapods
@@ -28,11 +49,9 @@ This project uses Cocoapods to manage 3rd parties, you have to run some commands
 
 You can refer to the offical information here [cocoapods.org](https://cocoapods.org)
 
+
 ### Install 3rd parties & open App
 1. Open Terminal app
 2. $ `cd <the/path/to/project>`
 3. $ `pod install`
 4. $ `open News.xcworkspace`
-
-### Preview
-![Preview](./Images/preview.gif)
