@@ -24,7 +24,7 @@ extension NewsViewModel: ViewModelProtocol, PagingFeature {
         let loadTrigger: Driver<Void>
         let reloadTrigger: Driver<Void>
         let loadMoreTrigger: Driver<Void>
-        
+        let onScreen: Driver<Bool>
         let selectCell: Driver<IndexPath>
         let changeCategory: Driver<Category>
     }
@@ -60,8 +60,8 @@ extension NewsViewModel: ViewModelProtocol, PagingFeature {
             .merge(
                 input.loadTrigger,
                 category.mapToVoid())
-            .withLatestFrom(category)
-            .distinctUntilChanged()
+            .withLatestFrom(input.onScreen)
+            .filter({ $0 })
             .mapToVoid()
         
         let getPageResult = getPage(loadTrigger: loadTrigger,

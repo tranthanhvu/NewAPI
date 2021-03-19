@@ -60,6 +60,12 @@ class ArticleViewController: UIViewController, ViewBindableProtocol {
     private func setupUI() {
         self.imageView.isHidden = true
         
+        self.imageView.layer.masksToBounds = false
+        self.imageView.layer.shadowColor = UIColor.black.cgColor
+        self.imageView.layer.shadowRadius = 3
+        self.imageView.layer.shadowOpacity = 0.3
+        self.imageView.layer.shadowOffset = CGSize(width: 0, height: 3)
+        
         detailButton.layer.cornerRadius = detailButton.frame.height * 0.5
         
         textView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 70, right: 10)
@@ -97,7 +103,8 @@ class ArticleViewController: UIViewController, ViewBindableProtocol {
     
     private func updateUI(article: Article) {
         let title = NSAttributedString(string: article.title, attributes: [
-            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20),
+            NSAttributedString.Key.foregroundColor: UIColor.label
         ])
         
 //        let longContent = (0...30).map({ _ in article.content }).joined(separator: "\n")
@@ -105,7 +112,8 @@ class ArticleViewController: UIViewController, ViewBindableProtocol {
         let content = article.content.isEmpty ? article.description : article.content
         
         let desc = NSAttributedString(string: content, attributes: [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15),
+            NSAttributedString.Key.foregroundColor: UIColor.label
         ])
         
         let leftParagraphStyle = NSMutableParagraphStyle()

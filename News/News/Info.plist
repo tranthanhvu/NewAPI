@@ -2,10 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>API_EP_HEADLINE</key>
-	<string>$(API_EP_HEADLINE)</string>
 	<key>API_EP_EVERYTHING</key>
 	<string>$(API_EP_EVERYTHING)</string>
+	<key>API_EP_HEADLINE</key>
+	<string>$(API_EP_HEADLINE)</string>
 	<key>API_HOST</key>
 	<string>$(API_HOST)</string>
 	<key>API_KEY</key>
@@ -60,8 +60,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

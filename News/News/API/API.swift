@@ -9,6 +9,10 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+public enum APIError: Error {
+    case other(Int, String) // code, message
+}
+
 struct APIHelper {
     public static func request(url: URL) -> Observable<Response> {
         let request = URLRequest(url: url)
@@ -22,6 +26,8 @@ struct APIHelper {
                     return Observable.error(error)
                 }
             })
+            .timeout(.seconds(5), scheduler: MainScheduler.instance)
+            .retry(3, shouldRetry: { !($0 is APIError) })
     }
 }
 
@@ -39,14 +45,13 @@ public struct NewsAPI: NewsAPIProtocol {
         }
         
         return APIHelper.request(url: url)
-            .map({ response -> PagingInfo<Article> in
-                let items = response.articles ?? []
-                let total = response.totalResults ?? 0
-                return PagingInfo(offset: offset,
-                                  limit: Endpoint.pageSize,
-                                  totalItems: response.totalResults ?? 0,
-                                  hasMorePages: offset + items.count < total,
-                                  items: items)
+            .flatMap({ (response) -> Observable<PagingInfo<Article>> in
+                let parser = NewsAPI.parse(response: response, offset: offset)
+                
+                switch parser {
+                case .success(let paging): return Observable.just(paging)
+                case .failure(let error): return Observable.error(error)
+                }
             })
     }
     
@@ -57,14 +62,32 @@ public struct NewsAPI: NewsAPIProtocol {
         }
         
         return APIHelper.request(url: url)
-            .map({ response -> PagingInfo<Article> in
-                let items = response.articles ?? []
-                let total = response.totalResults ?? 0
-                return PagingInfo(offset: offset,
-                                  limit: Endpoint.pageSize,
-                                  totalItems: response.totalResults ?? 0,
-                                  hasMorePages: offset + items.count < total,
-                                  items: items)
+            .flatMap({ (response) -> Observable<PagingInfo<Article>> in
+                let parser = NewsAPI.parse(response: response, offset: offset)
+                
+                switch parser {
+                case .success(let paging): return Observable.just(paging)
+                case .failure(let error): return Observable.error(error)
+                }
             })
+    }
+    
+    static func parse(response: Response, offset: Int) -> Result<PagingInfo<Article>, APIError> {
+        if response.status == .ok {
+            let items = response.articles ?? []
+            let total = response.totalResults ?? 0
+            let paging = PagingInfo(offset: offset,
+                                    limit: Endpoint.pageSize,
+                                    totalItems: response.totalResults ?? 0,
+                                    hasMorePages: offset + items.count < total,
+                                    items: items)
+            
+            return Result.success(paging)
+        } else {
+            let code = Int(response.code ?? "0") ?? 0
+            let message = response.message ?? ""
+            
+            return Result.failure(APIError.other(code, message))
+        }
     }
 }

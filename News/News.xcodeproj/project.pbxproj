@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1EFA69428F477736724BE84B /* Pods_News.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54295144125C129E6FD87B50 /* Pods_News.framework */; };
+		2EEC50BF2604933500081DE5 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEC50BE2604933500081DE5 /* UIViewController+Alert.swift */; };
+		2EEC50C426049DCC00081DE5 /* ObservableType+Retry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEC50C326049DCB00081DE5 /* ObservableType+Retry.swift */; };
 		2EF236FB260335AB00C3D821 /* ButtonTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF236F9260335AB00C3D821 /* ButtonTVC.swift */; };
 		2EF236FC260335AB00C3D821 /* ButtonTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EF236FA260335AB00C3D821 /* ButtonTVC.xib */; };
 		2EF23704260344CF00C3D821 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF23703260344CF00C3D821 /* Storage.swift */; };
@@ -71,8 +73,6 @@
 		BECF784D26018BCC00AD8447 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECF784C26018BCC00AD8447 /* UIViewController+Rx.swift */; };
 		BECF785326018BFA00AD8447 /* Drive+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECF785126018BFA00AD8447 /* Drive+Extension.swift */; };
 		BECF785426018BFA00AD8447 /* Observable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECF785226018BFA00AD8447 /* Observable+Extension.swift */; };
-		BECF785C26018C1800AD8447 /* ReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECF785926018C1800AD8447 /* ReachabilityService.swift */; };
-		BECF785D26018C1800AD8447 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECF785A26018C1800AD8447 /* Reachability.swift */; };
 		BED725422602D641009E06CF /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED725412602D641009E06CF /* ProfileCoordinator.swift */; };
 		BED725472602D64B009E06CF /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED725462602D64B009E06CF /* ProfileViewModel.swift */; };
 		BED725502602DA04009E06CF /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED7254F2602DA04009E06CF /* PickerViewController.swift */; };
@@ -99,6 +99,8 @@
 
 /* Begin PBXFileReference section */
 		0925E456121B696AE2759B83 /* Pods-NewsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsTests.release.xcconfig"; path = "Target Support Files/Pods-NewsTests/Pods-NewsTests.release.xcconfig"; sourceTree = "<group>"; };
+		2EEC50BE2604933500081DE5 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		2EEC50C326049DCB00081DE5 /* ObservableType+Retry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObservableType+Retry.swift"; sourceTree = "<group>"; };
 		2EF236F9260335AB00C3D821 /* ButtonTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTVC.swift; sourceTree = "<group>"; };
 		2EF236FA260335AB00C3D821 /* ButtonTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonTVC.xib; sourceTree = "<group>"; };
 		2EF23703260344CF00C3D821 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -174,8 +176,6 @@
 		BECF784C26018BCC00AD8447 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		BECF785126018BFA00AD8447 /* Drive+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Drive+Extension.swift"; sourceTree = "<group>"; };
 		BECF785226018BFA00AD8447 /* Observable+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Extension.swift"; sourceTree = "<group>"; };
-		BECF785926018C1800AD8447 /* ReachabilityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityService.swift; sourceTree = "<group>"; };
-		BECF785A26018C1800AD8447 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		BED725412602D641009E06CF /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		BED725462602D64B009E06CF /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		BED7254F2602DA04009E06CF /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
@@ -465,10 +465,10 @@
 		BECF7846260188B900AD8447 /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
+				2EEC50C326049DCB00081DE5 /* ObservableType+Retry.swift */,
+				2EEC50BE2604933500081DE5 /* UIViewController+Alert.swift */,
 				BE249C4926037ECE006A5EC9 /* UIScrollView+Extension.swift */,
 				BEC5BB8426026A0700364D70 /* UITableView+Extension.swift */,
-				BECF785A26018C1800AD8447 /* Reachability.swift */,
-				BECF785926018C1800AD8447 /* ReachabilityService.swift */,
 				BECF785126018BFA00AD8447 /* Drive+Extension.swift */,
 				BECF785226018BFA00AD8447 /* Observable+Extension.swift */,
 				BECF784C26018BCC00AD8447 /* UIViewController+Rx.swift */,
@@ -743,6 +743,7 @@
 				BECF782526013AB400AD8447 /* Endpoint.swift in Sources */,
 				2EF23704260344CF00C3D821 /* Storage.swift in Sources */,
 				BEC5BB5126025CB400364D70 /* CoordinateProtocol.swift in Sources */,
+				2EEC50BF2604933500081DE5 /* UIViewController+Alert.swift in Sources */,
 				BEC5BB722602648D00364D70 /* AppCoordinator.swift in Sources */,
 				BE249C5026038359006A5EC9 /* PagingViewController.swift in Sources */,
 				BECF78202601342200AD8447 /* User.swift in Sources */,
@@ -775,11 +776,11 @@
 				BE249C2A260371D8006A5EC9 /* Paging.swift in Sources */,
 				BECF77DC2601156900AD8447 /* AppManager.swift in Sources */,
 				BECF77E42601182F00AD8447 /* ProfileViewController.swift in Sources */,
-				BECF785D26018C1800AD8447 /* Reachability.swift in Sources */,
 				BE249C4A26037ECE006A5EC9 /* UIScrollView+Extension.swift in Sources */,
 				BECF77D62601154700AD8447 /* NewsViewController.swift in Sources */,
 				BECF77EF260118B800AD8447 /* API.swift in Sources */,
 				BEC5BB5B26025E8D00364D70 /* ArticleCoordinator.swift in Sources */,
+				2EEC50C426049DCC00081DE5 /* ObservableType+Retry.swift in Sources */,
 				BEC5BB6D2602641600364D70 /* UIWindow+Key.swift in Sources */,
 				BECF778E26010E9A00AD8447 /* SceneDelegate.swift in Sources */,
 				BECF77F62601276A00AD8447 /* Environment.swift in Sources */,
@@ -787,7 +788,6 @@
 				BED725552602DC0A009E06CF /* UIAlertController+Extension.swift in Sources */,
 				BECF783F2601873D00AD8447 /* ViewModelProtocol.swift in Sources */,
 				BEC5BB412602575400364D70 /* ArticleViewModel.swift in Sources */,
-				BECF785C26018C1800AD8447 /* ReachabilityService.swift in Sources */,
 				BED725502602DA04009E06CF /* PickerViewController.swift in Sources */,
 				BECF781B260133E300AD8447 /* Category.swift in Sources */,
 			);
@@ -1020,7 +1020,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5735V89Z5V;
 				INFOPLIST_FILE = NewsTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1043,7 +1043,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5735V89Z5V;
 				INFOPLIST_FILE = NewsTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

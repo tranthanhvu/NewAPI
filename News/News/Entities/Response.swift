@@ -7,8 +7,13 @@
 
 import Foundation
 
+public enum ResponseStatus: String {
+    case ok = "ok"
+    case error = "error"
+}
+
 public struct Response: Codable {
-    var status: String = ""
+    var status: ResponseStatus = .error
     var code: String? = nil
     var message: String? = nil
     var totalResults: Int? = nil
@@ -27,7 +32,12 @@ public struct Response: Codable {
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        status = try container.decode(String.self, forKey: .status)
+        
+        let strStatus = try container.decode(String.self, forKey: .status)
+        if let status = ResponseStatus(rawValue: strStatus) {
+            self.status = status
+        }
+        
         code = (try? container.decode(String.self, forKey: .code)) ?? nil
         message = (try? container.decode(String.self, forKey: .message)) ?? nil
         totalResults = (try? container.decode(Int.self, forKey: .totalResults)) ?? 0

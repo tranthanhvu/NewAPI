@@ -14,7 +14,6 @@ public class AppData {
     static var user: User?
 }
 
-
 public class AppManager {
     public static let shared = AppManager()
     

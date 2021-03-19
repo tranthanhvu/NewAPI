@@ -51,10 +51,17 @@ class NewsViewController: PagingViewController, ViewBindableProtocol {
         let loadMoreTrigger = self.tableView.getLoadMoreTrigger()
         let changeCategory = PublishSubject<Category>()
             
+        let onScreen = Driver
+            .merge(
+                self.rx.viewDidAppear.asDriver().map({ _ in true }),
+                self.rx.viewDidDisappear.asDriver().map({ _ in false })
+            )
+        
         let input = NewsViewModel.Input(
             loadTrigger: loadTrigger,
             reloadTrigger: reloadTrigger,
             loadMoreTrigger: loadMoreTrigger,
+            onScreen: onScreen,
             selectCell: tableView.rx.itemSelected.asDriver(),
             changeCategory: changeCategory.asDriverOnErrorJustComplete()
         )
@@ -91,6 +98,29 @@ class NewsViewController: PagingViewController, ViewBindableProtocol {
                 changeCategory.onNext(category)
             })
             .disposed(by: self.disposeBag)
+        
+        output.error
+            .drive(onNext: { [weak self] error in
+                guard let self = self else { return }
+
+                if let error = error as? APIError {
+                    switch error {
+                    case let .other(code, message):
+                        self.alert(message: message, title: "CODE: \(code)")
+                    }
+
+                    return
+                }
+                
+                let error = error as NSError
+                if error.domain == NSURLErrorDomain {
+                    self.alert(message: error.localizedDescription)
+                } else {
+                    self.alert(message: error.description)
+                }
+            })
+            .disposed(by: self.disposeBag)
+        
         
         bindReloading(output.isReloading)
         

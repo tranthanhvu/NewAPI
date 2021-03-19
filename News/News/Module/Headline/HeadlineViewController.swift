@@ -9,10 +9,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-enum Section: CaseIterable {
-    case main
-}
-
 class HeadlineViewController: PagingViewController, ViewBindableProtocol {
     
     // MARK: - Data
@@ -69,6 +65,28 @@ class HeadlineViewController: PagingViewController, ViewBindableProtocol {
         
         output.openDetail
             .drive()
+            .disposed(by: self.disposeBag)
+        
+        output.error
+            .drive(onNext: { [weak self] error in
+                guard let self = self else { return }
+
+                if let error = error as? APIError {
+                    switch error {
+                    case let .other(code, message):
+                        self.alert(message: message, title: "CODE: \(code)")
+                    }
+
+                    return
+                }
+
+                let error = error as NSError
+                if error.domain == NSURLErrorDomain {
+                    self.alert(message: error.localizedDescription)
+                } else {
+                    self.alert(message: error.description)
+                }
+            })
             .disposed(by: self.disposeBag)
         
         bindReloading(output.isReloading)
