@@ -46,14 +46,14 @@ class NewsViewController: PagingViewController, ViewBindableProtocol {
     }
     
     func bindViewModel() {
-        let loadTrigger = self.rx.viewDidAppear.take(1).asDriverOnErrorJustComplete().mapToVoid()
+        let loadTrigger = self.rx.viewDidAppear.asDriverOnErrorJustComplete().mapToVoid()
         let reloadTrigger = self.refreshControl.rx.controlEvent(.valueChanged).asDriverOnErrorJustComplete()
         let loadMoreTrigger = self.tableView.getLoadMoreTrigger()
         let changeCategory = PublishSubject<Category>()
             
         let onScreen = Driver
             .merge(
-                self.rx.viewDidAppear.asDriver().map({ _ in true }),
+                self.rx.viewWillAppear.asDriver().map({ _ in true }),
                 self.rx.viewDidDisappear.asDriver().map({ _ in false })
             )
         
