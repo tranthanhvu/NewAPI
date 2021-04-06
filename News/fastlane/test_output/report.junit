@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='NewsUITests.xctest' tests='10' failures='0'>
+  <testsuite name='NewsTests.APITest' tests='1' failures='0'>
+    <testcase classname='NewsTests.APITest' name='testPaging' time='0.010'/>
+  </testsuite>
+  <testsuite name='NewsTests.EndpointTest' tests='4' failures='0'>
+    <testcase classname='NewsTests.EndpointTest' name='testHeadlinesURL' time='0.001'/>
+    <testcase classname='NewsTests.EndpointTest' name='testLoadEnvironmentIndex' time='0.001'/>
+    <testcase classname='NewsTests.EndpointTest' name='testNewsURL' time='0.001'/>
+    <testcase classname='NewsTests.EndpointTest' name='testPageIndex' time='0.000'/>
+  </testsuite>
+  <testsuite name='NewsTests.NewsTests' tests='2' failures='0'>
+    <testcase classname='NewsTests.NewsTests' name='testExample' time='0.001'/>
+    <testcase classname='NewsTests.NewsTests' name='testPerformanceExample' time='0.333'/>
+  </testsuite>
+  <testsuite name='NewsTests.UserTest' tests='1' failures='0'>
+    <testcase classname='NewsTests.UserTest' name='testRegisterAndSignOut' time='0.010'/>
+  </testsuite>
+  <testsuite name='NewsUITests.NewsUITests' tests='2' failures='0'>
+    <testcase classname='NewsUITests.NewsUITests' name='testExample' time='1.806'/>
+    <testcase classname='NewsUITests.NewsUITests' name='testLaunchPerformance' time='16.298'/>
+  </testsuite>
+</testsuites>
